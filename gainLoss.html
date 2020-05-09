@@ -15,10 +15,10 @@
 var timeline = [];
 var testStimuli = [];
 
+var topImage = 'img/ger1.png'
 
 var trial_pairs = [
-  { stimulus: ['img/ger1.png','img/ger2.png']}, 
-  { stimulus: 'img/ger2.png'}
+  { top: 'img/ger1.png', bottom: 'img/ger2.png'}
   ]
 
 var fixation = {
@@ -30,12 +30,21 @@ var fixation = {
 
 var pairTrials = {
       type: 'image-button-response',
-      choices: ['top', 'bottom'],
-      stimulus: jsPsych.timelineVariable('stimulus'),
+      //button_html: '<img height ="200px" width="200px" src=%choice%></img>',
+      choices: jsPsych.NO_KEYS,
+      stimulus: trial_pairs[0].top
+      //jsPsych.timelineVariable('top'), jsPsych.timelineVariable('top')
   }
 
+  var twoImages = {
+    type: 'html-keyboard-response',
+    stimulus: "<img src='img/ger1.png' align='top' width=46%>  <img src='img/ger2.png' align='bottom' width=46% >",
+    choices: jsPsych.NO_KEYS,
+    trial_duration: 3000,
+};
+
 var testProcedure = {
-    timeline: [fixation, pairTrials],
+    timeline: [fixation, twoImages],
     timeline_variables: trial_pairs
 };
 
