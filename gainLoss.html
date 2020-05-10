@@ -8,6 +8,7 @@
   <script src="../jspsych-6.0.5/plugins/jspsych-image-button-response.js"></script>
   <script src="../jspsych-6.0.5/plugins/jspsych-image-keyboard-response.js"></script>
   <script src="../jspsych-6.0.5/plugins/jspsych-html-keyboard-response.js"></script>
+    <script src="../jspsych-6.0.5/plugins/jspsych-instructions.js"></script>
 </head>
 <body></body>
 <script>
@@ -16,6 +17,18 @@ var timeline = [];
 var testStimuli = [];
 var trial_pairs = []; 
 
+var instructions = {
+  type: "instructions",
+  pages: [ "<p> Gain Pair: </p>"+
+    "<img src='img/omicron.png'></img> <img src='img/pi.png'></img>",
+    "<p>Lose Pair: </p>"+
+    "<img src='img/psi.png'></img> <img src='img/omega.png'></img>",
+    "<p> Press 'y' for selecting the top and 'h' for selecting the bottom stimulus.</p>"
+    ],
+    show_clickable_nav:true
+};
+
+timeline.push(instructions);
 
 // #1 Win Pairs
 winPairUp_w = {stimulus: "<img src='img/omicron.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/pi.png' width=46%>", pairType: "gain", pairOri: "a-up", win: true}
