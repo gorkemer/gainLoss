@@ -15,20 +15,19 @@
 var timeline = [];
 var testStimuli = [];
 var trial_pairs = []; 
-var topImage = 'img/ger1.png'
-var reps_per_trial_type = 4;
+
 
 // #1 Win Pairs
-winPairUp_w = {stimulus: "<img src='img/ger1.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/ger2.png' width=46%>", pairType: "gain", pairOri: "a-up", win: true}
-winPairUp_n = {stimulus: "<img src='img/ger1.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/ger2.png' width=46%>", pairType: "gain", pairOri: "a-up", win: false}
-winPairDown_w = {stimulus: "<img src='img/ger2.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/ger1.png' width=46%>", pairType: "gain", pairOri: "a-down", win: true}
-winPairDown_n = {stimulus: "<img src='img/ger2.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/ger1.png' width=46%>", pairType: "gain", pairOri: "a-down", win: false}
+winPairUp_w = {stimulus: "<img src='img/omicron.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/pi.png' width=46%>", pairType: "gain", pairOri: "a-up", win: true}
+winPairUp_n = {stimulus: "<img src='img/omicron.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/pi.png' width=46%>", pairType: "gain", pairOri: "a-up", win: false}
+winPairDown_w = {stimulus: "<img src='img/pi.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/omicron.png' width=46%>", pairType: "gain", pairOri: "a-down", win: true}
+winPairDown_n = {stimulus: "<img src='img/pi.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/omicron.png' width=46%>", pairType: "gain", pairOri: "a-down", win: false}
 
 // #2 Loss Pairs
-lossPairUp_l = {stimulus: "<img src='img/ger1_tint.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/ger2_tint.png' width=46%>", pairType: "loss", pairOri: "a-up", win: true}
-lossPairUp_n = {stimulus: "<img src='img/ger1_tint.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/ger2_tint.png' width=46%>", pairType: "loss", pairOri: "a-up", win: false}
-lossPairDown_l = {stimulus: "<img src='img/ger2_tint.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/ger1_tint.png' width=46%>", pairType: "loss", pairOri: "a-down", win: true}
-lossPairDown_n = {stimulus: "<img src='img/ger2_tint.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/ger1_tint.png' width=46%>", pairType: "loss", pairOri: "a-down", win: false}
+lossPairUp_l = {stimulus: "<img src='img/psi.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/omega.png' width=46%>", pairType: "loss", pairOri: "a-up", win: true}
+lossPairUp_n = {stimulus: "<img src='img/psi.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/omega.png' width=46%>", pairType: "loss", pairOri: "a-up", win: false}
+lossPairDown_l = {stimulus: "<img src='img/omega.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/psi.png' width=46%>", pairType: "loss", pairOri: "a-down", win: true}
+lossPairDown_n = {stimulus: "<img src='img/omega.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/psi.png' width=46%>", pairType: "loss", pairOri: "a-down", win: false}
 
 
 trial_pairs.push(
@@ -53,6 +52,8 @@ trial_pairs.push(
   lossPairDown_l,
   lossPairDown_n
   );
+
+var trial_pairs = jsPsych.randomization.repeat(trial_pairs, 1);
 
 var fixation = {
       type: 'html-keyboard-response',
