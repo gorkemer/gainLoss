@@ -47,14 +47,30 @@ var pairTrials = {
   var twoImages = {
     type: 'html-keyboard-response',
     stimulus: jsPsych.timelineVariable('stimulus'),
-    choices: jsPsych.NO_KEYS,
-    trial_duration: 1000,
-};
+    choices: ['y', 'h'],
+    trial_duration: 4000,
+    //check what the response
+    on_finish: function (data) {
+      var responseGiven = jsPsych.data.get().last(1).values()[0].key_press
+      if (responseGiven == 89) { //89 is y, 72 is h
+        console.log('pressed y')
+        data.accuracy = 1
+      } else {
+        console.log('pressed h') 
+        data.accuracy = 0
+      }
+    }
+  }
 
 var testProcedure = {
     timeline: [fixation, twoImages],
     timeline_variables: trial_pairs
 };
+
+var responseFeedback = {
+  
+
+}
 
 timeline.push(testProcedure);
 //timeline.push(test_procedure1, splashTrial, test_procedure2, splashTrial);
