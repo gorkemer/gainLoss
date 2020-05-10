@@ -18,16 +18,41 @@ var trial_pairs = [];
 var topImage = 'img/ger1.png'
 var reps_per_trial_type = 4;
 
-demoTrialPair = {stimulus: "<img src='img/ger1.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/ger2.png' width=46%>"}
-demoTrialPairOp = {stimulus: "<img src='img/ger2.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/ger1.png' width=46%>"}
+// #1 Win Pairs
+winPairUp_w = {stimulus: "<img src='img/ger1.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/ger2.png' width=46%>", pairType: "gain", pairOri: "a-up", win: true}
+winPairUp_n = {stimulus: "<img src='img/ger1.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/ger2.png' width=46%>", pairType: "gain", pairOri: "a-up", win: false}
+winPairDown_w = {stimulus: "<img src='img/ger2.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/ger1.png' width=46%>", pairType: "gain", pairOri: "a-down", win: true}
+winPairDown_n = {stimulus: "<img src='img/ger2.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/ger1.png' width=46%>", pairType: "gain", pairOri: "a-down", win: false}
 
-difDemoTrialPair = {stimulus: "<img src='img/ger1_tint.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/ger2_tint.png' width=46%>"}
-difDemoTrialPairOp = {stimulus: "<img src='img/ger2_tint.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/ger1_tint.png' width=46%>"}
-//demoTrialPair = "<img display:block; position:absolute; left:0; top:0; src='img/ger1.png' width=46%>" + "<br>" + "<p> + </p>" + "<img top:auto; bottom:0; src='img/ger2.png' align='bottom' width=46% >"
-//demoTrialPairOp = "<img top:auto; bottom:0; src='img/ger2.png' align='bottom' width=46% >" + "<br>" + "<p> + </p>" + "<img display:block; position:absolute; left:0; top:0; src='img/ger1.png' width=46%>"
+// #2 Loss Pairs
+lossPairUp_l = {stimulus: "<img src='img/ger1_tint.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/ger2_tint.png' width=46%>", pairType: "loss", pairOri: "a-up", win: true}
+lossPairUp_n = {stimulus: "<img src='img/ger1_tint.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/ger2_tint.png' width=46%>", pairType: "loss", pairOri: "a-up", win: false}
+lossPairDown_l = {stimulus: "<img src='img/ger2_tint.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/ger1_tint.png' width=46%>", pairType: "loss", pairOri: "a-down", win: true}
+lossPairDown_n = {stimulus: "<img src='img/ger2_tint.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/ger1_tint.png' width=46%>", pairType: "loss", pairOri: "a-down", win: false}
 
-trial_pairs.push(demoTrialPair, demoTrialPairOp, difDemoTrialPair, difDemoTrialPairOp);
-jsPsych.randomization.shuffle(trial_pairs);
+
+trial_pairs.push(
+  winPairUp_w, 
+  winPairUp_w, 
+  winPairUp_w, 
+  winPairUp_w, 
+  winPairUp_n, 
+  winPairDown_w, 
+  winPairDown_w, 
+  winPairDown_w, 
+  winPairDown_w,
+  winPairDown_n,
+  lossPairUp_l,
+  lossPairUp_l,
+  lossPairUp_l,
+  lossPairUp_l,
+  lossPairUp_n,
+  lossPairDown_l,
+  lossPairDown_l,
+  lossPairDown_l,
+  lossPairDown_l,
+  lossPairDown_n
+  );
 
 var fixation = {
       type: 'html-keyboard-response',
@@ -36,27 +61,38 @@ var fixation = {
       trial_duration: 500
     };
 
-var pairTrials = {
-      type: 'image-button-response',
-      //button_html: '<img height ="200px" width="200px" src=%choice%></img>',
-      choices: jsPsych.NO_KEYS,
-      stimulus: trial_pairs[0].top
-      //jsPsych.timelineVariable('top'), jsPsych.timelineVariable('top')
-  }
-
-  var twoImages = {
+var twoImages = {
     type: 'html-keyboard-response',
     stimulus: jsPsych.timelineVariable('stimulus'),
     choices: ['y', 'h'],
-    trial_duration: 4000,
+    trial_duration: 2000,
+    data: {pair_type: jsPsych.timelineVariable('pairType'), pair_ori: jsPsych.timelineVariable('pairOri'), isItWin: jsPsych.timelineVariable('win')},
     //check what the response
     on_finish: function (data) {
-      var responseGiven = jsPsych.data.get().last(1).values()[0].key_press
-      if (responseGiven == 89) { //89 is y, 72 is h
-        console.log('pressed y')
+      var responseGiven = jsPsych.data.get().last(1).values()[0].key_press;
+      var pair_type = jsPsych.data.get().last(1).values()[0].pair_type;
+      var pair_ori = jsPsych.data.get().last(1).values()[0].pair_ori;
+      var win_type = jsPsych.data.get().last(1).values()[0].isItWin;
+        // gain logic
+      if (pair_type == "gain" && responseGiven == 89 && pair_ori == "a-up" && win_type == true) { //89 is y, 72 is h
+        console.log('pair from gain; pressed y and ori was up and win is true')
         data.accuracy = 1
+      } else if (pair_type == "gain" && responseGiven == 72 && pair_ori == "a-down" && win_type == true) {
+        console.log('pair from gain; pressed h and ori was down and win is true') 
+        data.accuracy = 1
+        // loss logic
+      } else if (pair_type == "loss" && responseGiven == 89 && pair_ori == "a-up" && win_type == true) {
+        console.log('pair from loss; pressed h and ori was down and win is true, (loss 1)') 
+        data.accuracy = -1
+      } else if (pair_type == "loss" && responseGiven == 72 && pair_ori == "a-down" && win_type == true) {
+        console.log('pair from loss; pressed h and ori was down and win is true, (loss 1)') 
+        data.accuracy = -1
+
       } else {
-        console.log('pressed h') 
+        console.log('running else');
+        console.log('responseGiven', responseGiven);
+        console.log('pair_ori', pair_ori);
+        console.log('isItWin', win_type);
         data.accuracy = 0
       }
     }
@@ -65,56 +101,31 @@ var pairTrials = {
 var responseFeedback = {
     type: "html-keyboard-response",
     stimulus: function () {
-        var lastButton = jsPsych.data.get().last(1).values()[0].accuracy; // get the data from two trials prior
-          if (lastButton == 1) {
-            return "You win!";
+        var responseAccuracy = jsPsych.data.get().last(1).values()[0].accuracy; // get the data from two trials prior
+          if (responseAccuracy == 1) {
+            return "You gained 1!";
+          } else if (responseAccuracy == -1) {
+            return "You lost 1!";
           } else {
-            console.log('showing "banked!') //returns to bank
-            return "You lost!";
+            return "You gain nothing!";
           }
       },
     trial_duration: 1000
 };
 
-
-    // var debrief_block = {
-    //   type: "html-keyboard-response",
-    //   stimulus: function() {
-
-    //     var trials = jsPsych.data.get().filter({test_part: 'test'});
-    //     var correct_trials = trials.filter({correct: true});
-    //     var accuracy = Math.round(correct_trials.count() / trials.count() * 100);
-    //     var rt = Math.round(correct_trials.select('rt').mean());
-
-    //     return "<p>You responded correctly on "+accuracy+"% of the trials.</p>"+
-    //     "<p>Your average response time was "+rt+"ms.</p>"+
-    //     "<p>Press any key to complete the experiment. Thank you!</p>";
-
-    //   }
-    // };
-
-
-
-
-
 var testProcedure = {
-    timeline: [fixation, twoImages,responseFeedback],
+    timeline: [twoImages,responseFeedback],
     timeline_variables: trial_pairs
 };
 
-
 timeline.push(testProcedure);
-//timeline.push(test_procedure1, splashTrial, test_procedure2, splashTrial);
 
   jsPsych.init({
     timeline: timeline,
-    //sample: {type: 'fixed-repetitions', size: reps_per_trial_type},
     on_finish: function() {
       jsPsych.data.displayData();
     }
   });
 
-
 </script>
-
 </html>
