@@ -14,12 +14,16 @@
 
 var timeline = [];
 var testStimuli = [];
-
+var trial_pairs = []; 
 var topImage = 'img/ger1.png'
 
-var trial_pairs = [
-  { top: 'img/ger1.png', bottom: 'img/ger2.png'}
-  ]
+
+demoTrialPair = {stimulus: "<img src='img/ger1.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/ger2.png' width=46%>"}
+demoTrialPairOp = {stimulus: "<img src='img/ger2.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/ger1.png' width=46%>"}
+//demoTrialPair = "<img display:block; position:absolute; left:0; top:0; src='img/ger1.png' width=46%>" + "<br>" + "<p> + </p>" + "<img top:auto; bottom:0; src='img/ger2.png' align='bottom' width=46% >"
+//demoTrialPairOp = "<img top:auto; bottom:0; src='img/ger2.png' align='bottom' width=46% >" + "<br>" + "<p> + </p>" + "<img display:block; position:absolute; left:0; top:0; src='img/ger1.png' width=46%>"
+
+trial_pairs.push(demoTrialPair, demoTrialPairOp)
 
 var fixation = {
       type: 'html-keyboard-response',
@@ -38,7 +42,7 @@ var pairTrials = {
 
   var twoImages = {
     type: 'html-keyboard-response',
-    stimulus: "<img src='img/ger1.png' align='top' width=46%>  <img src='img/ger2.png' align='bottom' width=46% >",
+    stimulus: jsPsych.timelineVariable('stimulus'),
     choices: jsPsych.NO_KEYS,
     trial_duration: 3000,
 };
