@@ -16,14 +16,18 @@ var timeline = [];
 var testStimuli = [];
 var trial_pairs = []; 
 var topImage = 'img/ger1.png'
-
+var reps_per_trial_type = 4;
 
 demoTrialPair = {stimulus: "<img src='img/ger1.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/ger2.png' width=46%>"}
 demoTrialPairOp = {stimulus: "<img src='img/ger2.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/ger1.png' width=46%>"}
+
+difDemoTrialPair = {stimulus: "<img src='img/ger1_tint.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/ger2_tint.png' width=46%>"}
+difDemoTrialPairOp = {stimulus: "<img src='img/ger2_tint.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/ger1_tint.png' width=46%>"}
 //demoTrialPair = "<img display:block; position:absolute; left:0; top:0; src='img/ger1.png' width=46%>" + "<br>" + "<p> + </p>" + "<img top:auto; bottom:0; src='img/ger2.png' align='bottom' width=46% >"
 //demoTrialPairOp = "<img top:auto; bottom:0; src='img/ger2.png' align='bottom' width=46% >" + "<br>" + "<p> + </p>" + "<img display:block; position:absolute; left:0; top:0; src='img/ger1.png' width=46%>"
 
-trial_pairs.push(demoTrialPair, demoTrialPairOp)
+trial_pairs.push(demoTrialPair, demoTrialPairOp, difDemoTrialPair, difDemoTrialPairOp);
+jsPsych.randomization.shuffle(trial_pairs);
 
 var fixation = {
       type: 'html-keyboard-response',
@@ -44,7 +48,7 @@ var pairTrials = {
     type: 'html-keyboard-response',
     stimulus: jsPsych.timelineVariable('stimulus'),
     choices: jsPsych.NO_KEYS,
-    trial_duration: 3000,
+    trial_duration: 1000,
 };
 
 var testProcedure = {
@@ -57,6 +61,7 @@ timeline.push(testProcedure);
 
   jsPsych.init({
     timeline: timeline,
+    //sample: {type: 'fixed-repetitions', size: reps_per_trial_type},
     on_finish: function() {
       jsPsych.data.displayData();
     }
