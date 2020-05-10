@@ -62,15 +62,46 @@ var pairTrials = {
     }
   }
 
+var responseFeedback = {
+    type: "html-keyboard-response",
+    stimulus: function () {
+        var lastButton = jsPsych.data.get().last(1).values()[0].accuracy; // get the data from two trials prior
+          if (lastButton == 1) {
+            return "You win!";
+          } else {
+            console.log('showing "banked!') //returns to bank
+            return "You lost!";
+          }
+      },
+    trial_duration: 1000
+};
+
+
+    // var debrief_block = {
+    //   type: "html-keyboard-response",
+    //   stimulus: function() {
+
+    //     var trials = jsPsych.data.get().filter({test_part: 'test'});
+    //     var correct_trials = trials.filter({correct: true});
+    //     var accuracy = Math.round(correct_trials.count() / trials.count() * 100);
+    //     var rt = Math.round(correct_trials.select('rt').mean());
+
+    //     return "<p>You responded correctly on "+accuracy+"% of the trials.</p>"+
+    //     "<p>Your average response time was "+rt+"ms.</p>"+
+    //     "<p>Press any key to complete the experiment. Thank you!</p>";
+
+    //   }
+    // };
+
+
+
+
+
 var testProcedure = {
-    timeline: [fixation, twoImages],
+    timeline: [fixation, twoImages,responseFeedback],
     timeline_variables: trial_pairs
 };
 
-var responseFeedback = {
-  
-
-}
 
 timeline.push(testProcedure);
 //timeline.push(test_procedure1, splashTrial, test_procedure2, splashTrial);
