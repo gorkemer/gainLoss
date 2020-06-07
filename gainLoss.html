@@ -20,8 +20,8 @@ var trial_pairsLoss = [];
 
 var instructions = {
   type: "instructions",
-  pages: [ "<p> You'll need to select a shape and gain as many point as possible (gain task), </p>"+
-    "<p> or avoid losing as many points as possible (loss task). <br> <br> PRESS 'Y' to select top and 'H' to select bottom. </p>"
+  pages: [ "<p> In each trial of this task, you are asked to choose between two stimuli drawn in different shapes. <br> One of them is the 'right' one, and most likely, you will be rewarded with points for selecting it. <br> The other one is the 'wrong' one, and if you select it, you will likely lose points.</p>"+
+    "<p> Neither the right nor the wrong stimulus is so 100% of the trials; just in a majority of them, in a probabilistic fashion. <br> The only way to know which shape is the right one is by trial-and-error. <br>Please take into account that your main task is to accumulate as many points as you can.</p>" + "<p> PRESS Up Arrow Key to select the top and Down Arrow Key to select the one in the bottom.</p>" 
     ],
     show_clickable_nav:true
 };
@@ -165,7 +165,7 @@ var fixation = {
 var twoImagesGain = {
     type: 'html-keyboard-response',
     stimulus: jsPsych.timelineVariable('stimulus'),
-    choices: ['y', 'h'],
+    choices: ['up arrow', 'down arrow'],
     //trial_duration: 2000,
     data: {pair_type: jsPsych.timelineVariable('pairType'), pair_ori: jsPsych.timelineVariable('pairOri'), isItWin: jsPsych.timelineVariable('win')},
     //check what the response
@@ -175,10 +175,10 @@ var twoImagesGain = {
       var pair_ori = jsPsych.data.get().last(1).values()[0].pair_ori;
       var win_type = jsPsych.data.get().last(1).values()[0].isItWin;
         // gain logic
-      if (pair_type == "gain" && responseGiven == 89 && pair_ori == "a-up" && win_type == true) { //89 is y, 72 is h
+      if (pair_type == "gain" && responseGiven == 38 && pair_ori == "a-up" && win_type == true) { // 38 uparrow, 40 downarrow //89 is y, 72 is h
         console.log('pair from gain; pressed y and ori was up and win is true')
         data.accuracy = 1
-      } else if (pair_type == "gain" && responseGiven == 72 && pair_ori == "a-down" && win_type == true) {
+      } else if (pair_type == "gain" && responseGiven == 40 && pair_ori == "a-down" && win_type == true) {
         console.log('pair from gain; pressed h and ori was down and win is true') 
         data.accuracy = 1
         // loss logic
@@ -195,7 +195,7 @@ var twoImagesGain = {
 var twoImagesLoss = {
     type: 'html-keyboard-response',
     stimulus: jsPsych.timelineVariable('stimulus'),
-    choices: ['y', 'h'],
+    choices: ['up arrow', 'down arrow'],
     trial_duration: 2000,
     data: {pair_type: jsPsych.timelineVariable('pairType'), pair_ori: jsPsych.timelineVariable('pairOri'), isItWin: jsPsych.timelineVariable('win')},
     //check what the response
@@ -205,10 +205,10 @@ var twoImagesLoss = {
       var pair_ori = jsPsych.data.get().last(1).values()[0].pair_ori;
       var win_type = jsPsych.data.get().last(1).values()[0].isItWin;
         // loss logic
-      if (pair_type == "loss" && responseGiven == 89 && pair_ori == "a-up" && win_type == true) {
+      if (pair_type == "loss" && responseGiven == 38 && pair_ori == "a-up" && win_type == true) {
         console.log('pair from loss; pressed h and ori was down and win is true, (loss 1)') 
         data.accuracy = -1
-      } else if (pair_type == "loss" && responseGiven == 72 && pair_ori == "a-down" && win_type == true) {
+      } else if (pair_type == "loss" && responseGiven == 40 && pair_ori == "a-down" && win_type == true) {
         console.log('pair from loss; pressed h and ori was down and win is true, (loss 1)') 
         data.accuracy = -1
       } else {
