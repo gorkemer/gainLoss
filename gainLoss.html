@@ -20,8 +20,13 @@ var trial_pairsLoss = [];
 
 var instructions = {
   type: "instructions",
-  pages: [ "<p> In each trial of this task, you are asked to choose between two stimuli drawn in different shapes. <br> One of them is the 'right' one, and most likely, you will be rewarded with points for selecting it. <br> The other one is the 'wrong' one, and if you select it, you will likely lose points.</p>"+
-    "<p> Neither the right nor the wrong stimulus is so 100% of the trials; just in a majority of them, in a probabilistic fashion. <br> The only way to know which shape is the right one is by trial-and-error. <br>Please take into account that your main task is to accumulate as many points as you can.</p>" + "<p> PRESS Up Arrow Key to select the top and Down Arrow Key to select the one in the bottom.</p>" 
+  pages: [ "<p> In each trial of this task, you are asked to choose between two stimuli drawn in different shapes.</p>"+ 
+  "<p> You will see a pair, and one of them is the 'right' one, and most likely, you will be rewarded with points for selecting it. The other one is the 'wrong' one, and if you select it, you will likely lose points.</p>",
+  "<p> Neither the right nor the wrong stimulus is so 100% of the trials; just in a majority of them, in a probabilistic fashion. <br></p>"+
+  "<p>The only way to know which shape is the right one is by trial-and-error.<br></p>",
+  "<p> PRESS 'Up-Arrow Key' to select the top and 'Down-Arrow Key' to select the one in the bottom.</p>" + 
+  "<img src='img/upDownKeys.png' height=20% width=20% >  </img>"+
+  "<p>Please take into account that your main task is to accumulate as many points as you can.</p>"
     ],
     show_clickable_nav:true
 };
@@ -169,7 +174,7 @@ var fixation = {
 var twoImagesGain = {
     type: 'html-keyboard-response',
     stimulus: jsPsych.timelineVariable('stimulus'),
-    choices: ['up arrow', 'down arrow'],
+    choices: ['uparrow', 'downarrow'],
     //trial_duration: 2000,
     data: {pair_type: jsPsych.timelineVariable('pairType'), pair_ori: jsPsych.timelineVariable('pairOri'), isItWin: jsPsych.timelineVariable('win')},
     //check what the response
