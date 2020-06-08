@@ -17,6 +17,10 @@ var timeline = [];
 var testStimuli = [];
 var trial_pairsGain = []; 
 var trial_pairsLoss = []; 
+var stim1 = "<img src='img/stim1-A_2.png' width=46%>"
+var stim2 = "<img src='img/stim2-F_2.png' width=46%>"
+var stim3 = "<img src='img/stim3-K_2.png' width=46%>"
+var stim4 = "<img src='img/stim4-R_2.png' width=46%>"
 
 var instructions = {
   type: "instructions",
@@ -74,61 +78,61 @@ console.log('Group is defined as: ', partGroup);
 
 if (partGroup == 1){
   // #1 Win Pairs
-var winPairUp_w = {stimulus: "<img src='img/stim1-A.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/stim2-F.png' width=46%>", pairType: "gain", pairOri: "a-up", win: true}
-var winPairUp_n = {stimulus: "<img src='img/stim1-A.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/stim2-F.png' width=46%>", pairType: "gain", pairOri: "a-up", win: false}
-var winPairDown_w = {stimulus: "<img src='img/stim2-F.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/stim1-A.png' width=46%>", pairType: "gain", pairOri: "a-down", win: true}
-var winPairDown_n = {stimulus: "<img src='img/stim2-F.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/stim1-A.png' width=46%>", pairType: "gain", pairOri: "a-down", win: false}
+var winPairUp_w = {stimulus: stim1 + "<br>" + "<p> + </p>"+ stim2, pairType: "gain", pairOri: "a-up", win: true}
+var winPairUp_n = {stimulus: stim1 + "<br>" + "<p> + </p>"+ stim2, pairType: "gain", pairOri: "a-up", win: false}
+var winPairDown_w = {stimulus: stim2 + "<br>" + "<p> + </p>"+ stim1, pairType: "gain", pairOri: "a-down", win: true}
+var winPairDown_n = {stimulus: stim2 + "<br>" + "<p> + </p>"+ stim1, pairType: "gain", pairOri: "a-down", win: false}
 
 // #2 Loss Pairs
-var lossPairUp_l = {stimulus: "<img src='img/stim3-K.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/stim4-R.png' width=46%>", pairType: "loss", pairOri: "a-up", win: true}
-var lossPairUp_n = {stimulus: "<img src='img/stim3-K.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/stim4-R.png' width=46%>", pairType: "loss", pairOri: "a-up", win: false}
-var lossPairDown_l = {stimulus: "<img src='img/stim4-R.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/stim3-K.png' width=46%>", pairType: "loss", pairOri: "a-down", win: true}
-var lossPairDown_n = {stimulus: "<img src='img/stim4-R.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/stim3-K.png' width=46%>", pairType: "loss", pairOri: "a-down", win: false}
+var lossPairUp_l = {stimulus: stim3 + "<br>" + "<p> + </p>"+ stim4, pairType: "loss", pairOri: "a-up", win: true}
+var lossPairUp_n = {stimulus: stim3 + "<br>" + "<p> + </p>"+ stim4, pairType: "loss", pairOri: "a-up", win: false}
+var lossPairDown_l = {stimulus: stim4 + "<br>" + "<p> + </p>"+ stim3, pairType: "loss", pairOri: "a-down", win: true}
+var lossPairDown_n = {stimulus: stim4 + "<br>" + "<p> + </p>"+ stim3, pairType: "loss", pairOri: "a-down", win: false}
 console.log("partGroup should be 1:", partGroup)
 } 
 
 else if (partGroup == 2){
   // #1 Win Pairs
-var winPairUp_w = {stimulus: "<img src='img/stim2-F.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/stim3-K.png' width=46%>", pairType: "gain", pairOri: "a-up", win: true}
-var winPairUp_n = {stimulus: "<img src='img/stim2-F.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/stim3-K.png' width=46%>", pairType: "gain", pairOri: "a-up", win: false}
-var winPairDown_w = {stimulus: "<img src='img/stim3-K.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/stim2-F.png' width=46%>", pairType: "gain", pairOri: "a-down", win: true}
-var winPairDown_n = {stimulus: "<img src='img/stim3-K.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/stim2-F.png' width=46%>", pairType: "gain", pairOri: "a-down", win: false}
+var winPairUp_w = {stimulus: stim2 + "<br>" + "<p> + </p>"+ stim3, pairType: "gain", pairOri: "a-up", win: true}
+var winPairUp_n = {stimulus: stim2 + "<br>" + "<p> + </p>"+ stim3, pairType: "gain", pairOri: "a-up", win: false}
+var winPairDown_w = {stimulus: stim3 + "<br>" + "<p> + </p>"+ stim2, pairType: "gain", pairOri: "a-down", win: true}
+var winPairDown_n = {stimulus: stim3 + "<br>" + "<p> + </p>"+ stim2, pairType: "gain", pairOri: "a-down", win: false}
 
 // #2 Loss Pairs
-var lossPairUp_l = {stimulus: "<img src='img/stim4-R.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/stim1-A.png' width=46%>", pairType: "loss", pairOri: "a-up", win: true}
-var lossPairUp_n = {stimulus: "<img src='img/stim4-R.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/stim1-A.png' width=46%>", pairType: "loss", pairOri: "a-up", win: false}
-var lossPairDown_l = {stimulus: "<img src='img/stim1-A.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/stim4-R.png' width=46%>", pairType: "loss", pairOri: "a-down", win: true}
-var lossPairDown_n = {stimulus: "<img src='img/stim1-A.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/stim4-R.png' width=46%>", pairType: "loss", pairOri: "a-down", win: false}
+var lossPairUp_l = {stimulus: stim4 + "<br>" + "<p> + </p>"+ stim1, pairType: "loss", pairOri: "a-up", win: true}
+var lossPairUp_n = {stimulus: stim4 + "<br>" + "<p> + </p>"+ stim1, pairType: "loss", pairOri: "a-up", win: false}
+var lossPairDown_l = {stimulus: stim1 + "<br>" + "<p> + </p>"+ stim4, pairType: "loss", pairOri: "a-down", win: true}
+var lossPairDown_n = {stimulus: stim1 + "<br>" + "<p> + </p>"+ stim4, pairType: "loss", pairOri: "a-down", win: false}
 console.log("partGroup should be 2:", partGroup)
 } 
 
 else if (partGroup == 3){
   // #1 Win Pairs
-var winPairUp_w = {stimulus: "<img src='img/stim3-K.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/stim4-R.png' width=46%>", pairType: "gain", pairOri: "a-up", win: true}
-var winPairUp_n = {stimulus: "<img src='img/stim3-K.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/stim4-R.png' width=46%>", pairType: "gain", pairOri: "a-up", win: false}
-var winPairDown_w = {stimulus: "<img src='img/stim4-R.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/stim3-K.png' width=46%>", pairType: "gain", pairOri: "a-down", win: true}
-var winPairDown_n = {stimulus: "<img src='img/stim4-R.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/stim3-K.png' width=46%>", pairType: "gain", pairOri: "a-down", win: false}
+var winPairUp_w = {stimulus: stim3 + "<br>" + "<p> + </p>"+ stim4, pairType: "gain", pairOri: "a-up", win: true}
+var winPairUp_n = {stimulus: stim3 + "<br>" + "<p> + </p>"+ stim4, pairType: "gain", pairOri: "a-up", win: false}
+var winPairDown_w = {stimulus: stim4 + "<br>" + "<p> + </p>"+ stim3, pairType: "gain", pairOri: "a-down", win: true}
+var winPairDown_n = {stimulus: stim4 + "<br>" + "<p> + </p>"+ stim3, pairType: "gain", pairOri: "a-down", win: false}
 
 // #2 Loss Pairs
-var lossPairUp_l = {stimulus: "<img src='img/stim1-A.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/stim2-F.png' width=46%>", pairType: "loss", pairOri: "a-up", win: true}
-var lossPairUp_n = {stimulus: "<img src='img/stim1-A.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/stim2-F.png' width=46%>", pairType: "loss", pairOri: "a-up", win: false}
-var lossPairDown_l = {stimulus: "<img src='img/stim2-F.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/stim1-A.png' width=46%>", pairType: "loss", pairOri: "a-down", win: true}
-var lossPairDown_n = {stimulus: "<img src='img/stim2-F.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/stim1-A.png' width=46%>", pairType: "loss", pairOri: "a-down", win: false}
+var lossPairUp_l = {stimulus: stim1 + "<br>" + "<p> + </p>"+ stim2, pairType: "loss", pairOri: "a-up", win: true}
+var lossPairUp_n = {stimulus: stim1 + "<br>" + "<p> + </p>"+ stim2, pairType: "loss", pairOri: "a-up", win: false}
+var lossPairDown_l = {stimulus: stim2 + "<br>" + "<p> + </p>"+ stim1, pairType: "loss", pairOri: "a-down", win: true}
+var lossPairDown_n = {stimulus: stim2 + "<br>" + "<p> + </p>"+ stim1, pairType: "loss", pairOri: "a-down", win: false}
 console.log("partGroup should be 3:", partGroup)
 } 
 
 else if (partGroup == 4){
   // #1 Win Pairs
-var winPairUp_w = {stimulus: "<img src='img/stim4-R.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/stim1-A.png' width=46%>", pairType: "gain", pairOri: "a-up", win: true}
-var winPairUp_n = {stimulus: "<img src='img/stim4-R.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/stim1-A.png' width=46%>", pairType: "gain", pairOri: "a-up", win: false}
-var winPairDown_w = {stimulus: "<img src='img/stim1-A.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/stim4-R.png' width=46%>", pairType: "gain", pairOri: "a-down", win: true}
-var winPairDown_n = {stimulus: "<img src='img/stim1-A.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/stim4-R.png' width=46%>", pairType: "gain", pairOri: "a-down", win: false}
+var winPairUp_w = {stimulus: stim4 + "<br>" + "<p> + </p>"+ stim1, pairType: "gain", pairOri: "a-up", win: true}
+var winPairUp_n = {stimulus: stim4 + "<br>" + "<p> + </p>"+ stim1, pairType: "gain", pairOri: "a-up", win: false}
+var winPairDown_w = {stimulus: stim1 + "<br>" + "<p> + </p>"+ stim4, pairType: "gain", pairOri: "a-down", win: true}
+var winPairDown_n = {stimulus: stim1 + "<br>" + "<p> + </p>"+ stim4, pairType: "gain", pairOri: "a-down", win: false}
 
 // #2 Loss Pairs
-var lossPairUp_l = {stimulus: "<img src='img/stim2-F.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/stim3-K.png' width=46%>", pairType: "loss", pairOri: "a-up", win: true}
-var lossPairUp_n = {stimulus: "<img src='img/stim2-F.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/stim3-K.png' width=46%>", pairType: "loss", pairOri: "a-up", win: false}
-var lossPairDown_l = {stimulus: "<img src='img/stim3-K.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/stim2-F.png' width=46%>", pairType: "loss", pairOri: "a-down", win: true}
-var lossPairDown_n = {stimulus: "<img src='img/stim3-K.png' width=46%>" + "<br>" + "<p> + </p>"+ "<img src='img/stim2-F.png' width=46%>", pairType: "loss", pairOri: "a-down", win: false}
+var lossPairUp_l = {stimulus: stim2 + "<br>" + "<p> + </p>"+ stim3, pairType: "loss", pairOri: "a-up", win: true}
+var lossPairUp_n = {stimulus: stim2 + "<br>" + "<p> + </p>"+ stim3, pairType: "loss", pairOri: "a-up", win: false}
+var lossPairDown_l = {stimulus: stim3 + "<br>" + "<p> + </p>"+ stim2, pairType: "loss", pairOri: "a-down", win: true}
+var lossPairDown_n = {stimulus: stim3 + "<br>" + "<p> + </p>"+ stim2, pairType: "loss", pairOri: "a-down", win: false}
 
 console.log("partGroup should be 4:", partGroup)
 }
