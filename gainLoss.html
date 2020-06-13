@@ -17,10 +17,11 @@ var timeline = [];
 var testStimuli = [];
 var trial_pairsGain = []; 
 var trial_pairsLoss = []; 
-var stim1 = "<img src='img/1.png' width=46%>"
-var stim2 = "<img src='img/2.png' width=46%>"
-var stim3 = "<img src='img/3.png' width=46%>"
-var stim4 = "<img src='img/4.png' width=46%>"
+var stim1 = "<img src='img/1.png' width=85%>"
+var stim2 = "<img src='img/2.png' width=85%>"
+var stim3 = "<img src='img/3.png' width=85%>"
+var stim4 = "<img src='img/4.png' width=85%>"
+//color in-line:  color: #ff0000;
 
 var instructions = {
   type: "instructions",
@@ -187,14 +188,21 @@ var twoImagesGain = {
       var pair_type = jsPsych.data.get().last(1).values()[0].pair_type;
       var pair_ori = jsPsych.data.get().last(1).values()[0].pair_ori;
       var win_type = jsPsych.data.get().last(1).values()[0].isItWin;
-        // gain logic
-      if (pair_type == "gain" && responseGiven == 38 && pair_ori == "a-up" && win_type == true) { // 38 uparrow, 40 downarrow //89 is y, 72 is h
-        console.log('pair from gain; pressed y and ori was up and win is true')
+
+      if (pair_type == "gain" && responseGiven == 38 && pair_ori == "a-up" && win_type == true) { // 38 uparrow, 40 downarrow 
+        console.log('pair from gain; pressed up and ori was up and win is true')
         data.accuracy = 1
       } else if (pair_type == "gain" && responseGiven == 40 && pair_ori == "a-down" && win_type == true) {
-        console.log('pair from gain; pressed h and ori was down and win is true') 
+        console.log('pair from gain; pressed up and ori was down and win is true') 
         data.accuracy = 1
-        // loss logic
+      // to process %20 wrong select but gained trials
+      } else if (pair_type == "gain" && responseGiven == 40 && pair_ori == "a-up" && win_type == false) {
+        console.log('pair from gain; pressed up and ori was down and win is true') 
+        data.accuracy = 1
+      } else if (pair_type == "gain" && responseGiven == 38 && pair_ori == "a-down" && win_type == false) {
+        console.log('pair from gain; pressed up and ori was down and win is true') 
+        data.accuracy = 1
+
       } else {
         console.log('running else');
         console.log('responseGiven', responseGiven);
@@ -208,8 +216,7 @@ var twoImagesGain = {
 var twoImagesLoss = {
     type: 'html-keyboard-response',
     stimulus: jsPsych.timelineVariable('stimulus'),
-    choices: ['up arrow', 'down arrow'],
-    trial_duration: 2000,
+    choices: ['uparrow', 'downarrow'],
     data: {pair_type: jsPsych.timelineVariable('pairType'), pair_ori: jsPsych.timelineVariable('pairOri'), isItWin: jsPsych.timelineVariable('win')},
     //check what the response
     on_finish: function (data) {
@@ -218,12 +225,22 @@ var twoImagesLoss = {
       var pair_ori = jsPsych.data.get().last(1).values()[0].pair_ori;
       var win_type = jsPsych.data.get().last(1).values()[0].isItWin;
         // loss logic
+
+
       if (pair_type == "loss" && responseGiven == 38 && pair_ori == "a-up" && win_type == true) {
-        console.log('pair from loss; pressed h and ori was down and win is true, (loss 1)') 
+        console.log('pair from loss; pressed down and ori was down and win is true, (loss 1)') 
         data.accuracy = -1
       } else if (pair_type == "loss" && responseGiven == 40 && pair_ori == "a-down" && win_type == true) {
-        console.log('pair from loss; pressed h and ori was down and win is true, (loss 1)') 
+        console.log('pair from loss; pressed down and ori was down and win is true, (loss 1)') 
         data.accuracy = -1
+      // to process %20 wrong select but gained trials
+      } else if (pair_type == "loss" && responseGiven == 40 && pair_ori == "a-up" && win_type == false) {
+        console.log('pair from gain; pressed up and ori was down and win is true') 
+        data.accuracy = 1
+      } else if (pair_type == "loss" && responseGiven == 38 && pair_ori == "a-down" && win_type == false) {
+        console.log('pair from gain; pressed up and ori was down and win is true') 
+        data.accuracy = 1
+
       } else {
         console.log('running else');
         console.log('responseGiven', responseGiven);
@@ -239,16 +256,33 @@ var responseFeedback = {
     stimulus: function () {
         var responseAccuracy = jsPsych.data.get().last(1).values()[0].accuracy; // get the data from two trials prior
           if (responseAccuracy == 1) {
-            return "You gained 1!";
+            return "<p><span style='font-size: 47px;'>You gained 1!</span></p>";
           } else if (responseAccuracy == -1) {
-            return "You lost 1!";
+            return "<p><span style='font-size: 47px;'>You lost 1!</span></p>";
           } else {
-            return "You gain nothing!";
+            return "<p><span style='font-size: 47px;'>You gained nothing!</span></p>";
           }
       },
     trial_duration: 1000
 };
 
+/*defining debriefing block*/
+var debrief = {
+  type: "html-keyboard-response",
+  stimulus: function() {
+    //var total_trials = Math.round(jsPsych.data.get().filter({trial_type: 'html-keyboard-response'}).count() -2);
+    //var total_trials = jsPsych.data.get().filter({trial_type: 'image-keyboard-response'}).count();
+    var corrResp = Math.round(jsPsych.data.get().filter({accuracy: 1}).count());
+    var wrongResp = Math.round(jsPsych.data.get().filter({accuracy: -1}).count());
+    //var congruent_rt = Math.round(jsPsych.data.get().filter({correct: true, stim_type: 'congruent'}).select('rt').mean());
+    //var incongruent_rt = Math.round(jsPsych.data.get().filter({correct: true, stim_type: 'incongruent'}).select('rt').mean());
+    var subjID = jsPsych.data.get().last(1).values()[0]['participantCode']
+    return "<p>You earned "+corrResp+" </p> " + "<p>but lost "+wrongResp+" of them.</p> " +
+    "<p><br>The experiment is now over. Thanks so much for participating. Press any key to complete the experiment.</p>";
+  }
+};
+
+//assigning test procedures
 var testProcedureGain = {
     timeline: [twoImagesGain,responseFeedback],
     timeline_variables: trial_pairsGain
@@ -259,12 +293,13 @@ var testProcedureLoss = {
     timeline_variables: trial_pairsLoss
 };
 
+//assiging task order based on the participantID
 if(participantID % 8 == 5 || participantID % 8 == 6 || participantID % 8 == 7 || participantID % 8 == 0){
   timeline.push(testProcedureLoss, taskSwitchScreen, testProcedureGain)
   console.log ("loss task starts first")
   var gainFirst = false
 } else {
-timeline.push(testProcedureGain, taskSwitchScreen, testProcedureLoss)
+timeline.push(testProcedureGain, taskSwitchScreen, testProcedureLoss, debrief)
 var gainFirst = true
 console.log ("gain task starts first")
 }
@@ -272,9 +307,9 @@ jsPsych.data.addProperties({gain_first: gainFirst})
 
   jsPsych.init({
     timeline: timeline,
-    on_finish: function() {
-      jsPsych.data.displayData();
-    }
+    //on_finish: function() {
+      //jsPsych.data.displayData();
+    //}
   });
 
 </script>
