@@ -1,0 +1,25 @@
+A- INTRODUCTION
+
+page 1
+In each trial of this task, you are asked to choose between two stimuli drawn in different shapes.
+You will see a pair, and one of them is the 'right' one, and most likely, you will be rewarded with points for selecting it. 
+The other one is the 'wrong' one, and if you select it, you will likely lose points.
+
+page 2
+Neither the right nor the wrong stimulus is so 100% of the trials; just in a majority of them, in a probabilistic fashion. 
+The only way to know which shape is the right one is by trial-and-error.
+
+page 3
+PRESS 'Up-Arrow Key' to select the top and 'Down-Arrow Key' to select the one in the bottom.
+<image highlighthing arrow keys here>
+Please take into account that your main task is to accumulate as many points as you can.
+
+B- TASK SWITCH SCREEN
+One of the task is over. Press 'next' to start the next task.
+
+C- DEBRIEF
+You earned <corrResp>, but lost <wrongResp> of them. The experiment is now over. 
+Thanks so much for participating. Press any key to complete the experiment.
+
+
+
