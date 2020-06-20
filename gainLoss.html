@@ -22,27 +22,27 @@ var stim2 = "<img src='img/2.png' width=85%>"
 var stim3 = "<img src='img/3.png' width=85%>"
 var stim4 = "<img src='img/4.png' width=85%>"
 //color in-line:  color: #ff0000;
+var fixCross = "<p><span style='font-size: 25px;'>+</span></p>"
 
-var instructions = {
+/* define welcome message trial */
+var welcome = {
   type: "instructions",
-  pages: [ "<p> In each trial of this task, you are asked to choose between two stimuli drawn in different shapes.</p>"+ 
-  "<p> You will see a pair, and one of them is the 'right' one, and most likely, you will be rewarded with points for selecting it. The other one is the 'wrong' one, and if you select it, you will likely lose points.</p>",
-  "<p> Neither the right nor the wrong stimulus is so 100% of the trials; just in a majority of them, in a probabilistic fashion. <br></p>"+
-  "<p>The only way to know which shape is the right one is by trial-and-error.<br></p>",
-  "<p> PRESS 'Up-Arrow Key' to select the top and 'Down-Arrow Key' to select the one in the bottom.</p>" + 
-  "<img src='img/upDownKeys.png' height=20% width=20% >  </img>"+
-  "<p>Please take into account that your main task is to accumulate as many points as you can.</p>"
-    ],
-    show_clickable_nav:true
-};
-
-timeline.push(instructions);
-
-var taskSwitchScreen = {
-  type: "instructions",
-  pages: ["<p> One of the task is over. Press 'next' to start the next task. </p>"],
+  pages: ["<p>Hello, thank you for participating in our experiment. You will now perform two tasks that are both around 2-3 minutes long. In each trial of the tasks, you have to choose between two different symbols displayed on the screen, above and below a central cross.</p>" +
+  "<p> Press the 'Up-Arrow Key' to select the top symbol and the 'Down-Arrow Key' to select the bottom symbol:</p>" +
+  "<img style='height: 20%; width: 20%; object-fit: cover'; src='img/upDownKeys.png'></img>"+
+     "<div style='margin: auto 0;text-align:center;'>"+
+  "<p style='display:inline-block;min-width:65.5%;'> As an outcome of your choice you may:</p>"+ 
+  "<span><br>&#8226 get nothing</span>" +
+  "<span><br>&#8226 gain 1 point</span>" +
+  "<span><br>&#8226 loss 1 point</span>" +
+  "<p style='display:inline-block;min-width:90.5%;'>  The two symbols displayed on a same screen are not equivalent in terms of outcome: with one you are more likely to get nothing than the other. Each symbol has its own meaning, regardless of where and when it is displayed.<p>" +
+  "<pstyle='display:inline-block;min-width:37.5%';> The aim of the game is to win as many points as possible.</p>" +
+  "<br> <p>Press 'next' to start."+
+  "</div>"],
+  post_trial_gap: 1000,
   show_clickable_nav:true
 };
+timeline.push(welcome);
 
 // getting the subject condition variable from the url sent out the subjects
 var participantID = jsPsych.data.getURLVariable('ParticipantID');
@@ -70,73 +70,63 @@ partGroup =4;
 jsPsych.data.addProperties({part_group: partGroup}) // update the global variable
 console.log('Group is defined as: ', partGroup);
 
-//assigning order of the tasks
-
-// stim1-omicron = A 
-// stim2-pi      = F
-// stim3-psi     = K
-// stim4-omaga   = R
-
-
-"<p><span style='font-size: 20px;'>You gained 1!</span></p>"
-
 if (partGroup == 1){
   // #1 Win Pairs
-var winPairUp_w = {stimulus: stim1 + "<p><span style='font-size: 20px;'>+</span></p>"+ stim2, pairType: "gain", pairOri: "a-up", win: true}
-var winPairUp_n = {stimulus: stim1 + "<p><span style='font-size: 20px;'>+</span></p>"+ stim2, pairType: "gain", pairOri: "a-up", win: false}
-var winPairDown_w = {stimulus: stim2 + "<p><span style='font-size: 20px;'>+</span></p>"+ stim1, pairType: "gain", pairOri: "a-down", win: true}
-var winPairDown_n = {stimulus: stim2 + "<p><span style='font-size: 20px;'>+</span></p>"+ stim1, pairType: "gain", pairOri: "a-down", win: false}
+var winPairUp_w = {stimulus: stim1+fixCross+stim2, pairType: "gain", pairOri: "a-up", win: true}
+var winPairUp_n = {stimulus: stim1+fixCross+stim2, pairType: "gain", pairOri: "a-up", win: false}
+var winPairDown_w = {stimulus: stim2+fixCross+stim1, pairType: "gain", pairOri: "a-down", win: true}
+var winPairDown_n = {stimulus: stim2+fixCross+stim1, pairType: "gain", pairOri: "a-down", win: false}
 
 // #2 Loss Pairs
-var lossPairUp_l = {stimulus: stim3 + "<p><span style='font-size: 20px;'>+</span></p>"+ stim4, pairType: "loss", pairOri: "a-up", win: true}
-var lossPairUp_n = {stimulus: stim3 + "<p><span style='font-size: 20px;'>+</span></p>"+ stim4, pairType: "loss", pairOri: "a-up", win: false}
-var lossPairDown_l = {stimulus: stim4 + "<p><span style='font-size: 20px;'>+</span></p>"+ stim3, pairType: "loss", pairOri: "a-down", win: true}
-var lossPairDown_n = {stimulus: stim4 + "<p><span style='font-size: 20px;'>+</span></p>"+ stim3, pairType: "loss", pairOri: "a-down", win: false}
+var lossPairUp_l = {stimulus: stim3 + fixCross+ stim4, pairType: "loss", pairOri: "a-up", win: true}
+var lossPairUp_n = {stimulus: stim3 + fixCross+ stim4, pairType: "loss", pairOri: "a-up", win: false}
+var lossPairDown_l = {stimulus: stim4 + fixCross+ stim3, pairType: "loss", pairOri: "a-down", win: true}
+var lossPairDown_n = {stimulus: stim4 + fixCross+ stim3, pairType: "loss", pairOri: "a-down", win: false}
 console.log("partGroup should be 1:", partGroup)
 } 
 
 else if (partGroup == 2){
   // #1 Win Pairs
-var winPairUp_w = {stimulus: stim2 + "<p><span style='font-size: 20px;'>+</span></p>"+ stim3, pairType: "gain", pairOri: "a-up", win: true}
-var winPairUp_n = {stimulus: stim2 + "<p><span style='font-size: 20px;'>+</span></p>"+ stim3, pairType: "gain", pairOri: "a-up", win: false}
-var winPairDown_w = {stimulus: stim3 + "<p><span style='font-size: 20px;'>+</span></p>"+ stim2, pairType: "gain", pairOri: "a-down", win: true}
-var winPairDown_n = {stimulus: stim3 + "<p><span style='font-size: 20px;'>+</span></p>"+ stim2, pairType: "gain", pairOri: "a-down", win: false}
+var winPairUp_w = {stimulus: stim2 + fixCross+ stim3, pairType: "gain", pairOri: "a-up", win: true}
+var winPairUp_n = {stimulus: stim2 + fixCross+ stim3, pairType: "gain", pairOri: "a-up", win: false}
+var winPairDown_w = {stimulus: stim3 + fixCross+ stim2, pairType: "gain", pairOri: "a-down", win: true}
+var winPairDown_n = {stimulus: stim3 + fixCross+ stim2, pairType: "gain", pairOri: "a-down", win: false}
 
 // #2 Loss Pairs
-var lossPairUp_l = {stimulus: stim4 + "<p><span style='font-size: 20px;'>+</span></p>"+ stim1, pairType: "loss", pairOri: "a-up", win: true}
-var lossPairUp_n = {stimulus: stim4 + "<p><span style='font-size: 20px;'>+</span></p>" stim1, pairType: "loss", pairOri: "a-up", win: false}
-var lossPairDown_l = {stimulus: stim1 + "<p><span style='font-size: 20px;'>+</span></p>"+ stim4, pairType: "loss", pairOri: "a-down", win: true}
-var lossPairDown_n = {stimulus: stim1 + "<p><span style='font-size: 20px;'>+</span></p>"+ stim4, pairType: "loss", pairOri: "a-down", win: false}
+var lossPairUp_l = {stimulus: stim4 + fixCross+ stim1, pairType: "loss", pairOri: "a-up", win: true}
+var lossPairUp_n = {stimulus: stim4 + fixCross + stim1, pairType: "loss", pairOri: "a-up", win: false}
+var lossPairDown_l = {stimulus: stim1 + fixCross+ stim4, pairType: "loss", pairOri: "a-down", win: true}
+var lossPairDown_n = {stimulus: stim1 + fixCross+ stim4, pairType: "loss", pairOri: "a-down", win: false}
 console.log("partGroup should be 2:", partGroup)
 } 
 
 else if (partGroup == 3){
   // #1 Win Pairs
-var winPairUp_w = {stimulus: stim3 + "<p><span style='font-size: 20px;'>+</span></p>"+ stim4, pairType: "gain", pairOri: "a-up", win: true}
-var winPairUp_n = {stimulus: stim3 + "<p><span style='font-size: 20px;'>+</span></p>"+ stim4, pairType: "gain", pairOri: "a-up", win: false}
-var winPairDown_w = {stimulus: stim4 + "<p><span style='font-size: 20px;'>+</span></p>"+ stim3, pairType: "gain", pairOri: "a-down", win: true}
-var winPairDown_n = {stimulus: stim4 + "<p><span style='font-size: 20px;'>+</span></p>"+ stim3, pairType: "gain", pairOri: "a-down", win: false}
+var winPairUp_w = {stimulus: stim3 + fixCross+ stim4, pairType: "gain", pairOri: "a-up", win: true}
+var winPairUp_n = {stimulus: stim3 + fixCross+ stim4, pairType: "gain", pairOri: "a-up", win: false}
+var winPairDown_w = {stimulus: stim4 + fixCross+ stim3, pairType: "gain", pairOri: "a-down", win: true}
+var winPairDown_n = {stimulus: stim4 + fixCross+ stim3, pairType: "gain", pairOri: "a-down", win: false}
 
 // #2 Loss Pairs
-var lossPairUp_l = {stimulus: stim1 + "<p><span style='font-size: 20px;'>+</span></p>"+ stim2, pairType: "loss", pairOri: "a-up", win: true}
-var lossPairUp_n = {stimulus: stim1 + "<p><span style='font-size: 20px;'>+</span></p>"+ stim2, pairType: "loss", pairOri: "a-up", win: false}
-var lossPairDown_l = {stimulus: stim2 + "<p><span style='font-size: 20px;'>+</span></p>"+ stim1, pairType: "loss", pairOri: "a-down", win: true}
-var lossPairDown_n = {stimulus: stim2 + "<p><span style='font-size: 20px;'>+</span></p>"+ stim1, pairType: "loss", pairOri: "a-down", win: false}
+var lossPairUp_l = {stimulus: stim1 + fixCross+ stim2, pairType: "loss", pairOri: "a-up", win: true}
+var lossPairUp_n = {stimulus: stim1 + fixCross+ stim2, pairType: "loss", pairOri: "a-up", win: false}
+var lossPairDown_l = {stimulus: stim2 + fixCross+ stim1, pairType: "loss", pairOri: "a-down", win: true}
+var lossPairDown_n = {stimulus: stim2 + fixCross+ stim1, pairType: "loss", pairOri: "a-down", win: false}
 console.log("partGroup should be 3:", partGroup)
 } 
 
 else if (partGroup == 4){
   // #1 Win Pairs
-var winPairUp_w = {stimulus: stim4 + "<p><span style='font-size: 20px;'>+</span></p>"+ stim1, pairType: "gain", pairOri: "a-up", win: true}
-var winPairUp_n = {stimulus: stim4 + "<p><span style='font-size: 20px;'>+</span></p>"+ stim1, pairType: "gain", pairOri: "a-up", win: false}
-var winPairDown_w = {stimulus: stim1 + "<p><span style='font-size: 20px;'>+</span></p>"+ stim4, pairType: "gain", pairOri: "a-down", win: true}
-var winPairDown_n = {stimulus: stim1 + "<p><span style='font-size: 20px;'>+</span></p>"+ stim4, pairType: "gain", pairOri: "a-down", win: false}
+var winPairUp_w = {stimulus: stim4 + fixCross+ stim1, pairType: "gain", pairOri: "a-up", win: true}
+var winPairUp_n = {stimulus: stim4 + fixCross+ stim1, pairType: "gain", pairOri: "a-up", win: false}
+var winPairDown_w = {stimulus: stim1 + fixCross+ stim4, pairType: "gain", pairOri: "a-down", win: true}
+var winPairDown_n = {stimulus: stim1 + fixCross+ stim4, pairType: "gain", pairOri: "a-down", win: false}
 
 // #2 Loss Pairs
-var lossPairUp_l = {stimulus: stim2 + "<p><span style='font-size: 20px;'>+</span></p>"+ stim3, pairType: "loss", pairOri: "a-up", win: true}
-var lossPairUp_n = {stimulus: stim2 + "<p><span style='font-size: 20px;'>+</span></p>"+ stim3, pairType: "loss", pairOri: "a-up", win: false}
-var lossPairDown_l = {stimulus: stim3 + "<p><span style='font-size: 20px;'>+</span></p>"+ stim2, pairType: "loss", pairOri: "a-down", win: true}
-var lossPairDown_n = {stimulus: stim3 + "<p><span style='font-size: 20px;'>+</span></p>"+ stim2, pairType: "loss", pairOri: "a-down", win: false}
+var lossPairUp_l = {stimulus: stim2 + fixCross+ stim3, pairType: "loss", pairOri: "a-up", win: true}
+var lossPairUp_n = {stimulus: stim2 + fixCross+ stim3, pairType: "loss", pairOri: "a-up", win: false}
+var lossPairDown_l = {stimulus: stim3 + fixCross+ stim2, pairType: "loss", pairOri: "a-down", win: true}
+var lossPairDown_n = {stimulus: stim3 + fixCross+ stim2, pairType: "loss", pairOri: "a-down", win: false}
 
 console.log("partGroup should be 4:", partGroup)
 }
@@ -259,29 +249,39 @@ var responseFeedback = {
     stimulus: function () {
         var responseAccuracy = jsPsych.data.get().last(1).values()[0].accuracy; // get the data from two trials prior
           if (responseAccuracy == 1) {
-            return "<p><span style='font-size: 27px;'>Gain 1</span></p>";
+            return "<p><span style='font-size: 25px;'>Gain 1</span></p>";
           } else if (responseAccuracy == -1) {
-            return "<p><span style='font-size: 27px;'>Loss 1</span></p>";
+            return "<p><span style='font-size: 25px;'>Loss 1</span></p>";
           } else {
-            return "<p><span style='font-size: 27px;'>No point</span></p>";
+            return "<p><span style='font-size: 25px;'>No point</span></p>";
           }
       },
     trial_duration: 1500
 };
 
+
+var taskSwitchScreen = {
+  type: "instructions",
+  pages: ["<p> You have finished the first task. You will now start the next task with new symbols. <br>Press 'next' to start.</p>"],
+  show_clickable_nav:true
+};
+
 /*defining debriefing block*/
 var debrief = {
   type: "html-keyboard-response",
+  choices: jsPsych.NO_KEYS,
+  trial_duration: 5000,
   stimulus: function() {
     //var total_trials = Math.round(jsPsych.data.get().filter({trial_type: 'html-keyboard-response'}).count() -2);
     //var total_trials = jsPsych.data.get().filter({trial_type: 'image-keyboard-response'}).count();
     var corrResp = Math.round(jsPsych.data.get().filter({accuracy: 1}).count());
     var wrongResp = Math.round(jsPsych.data.get().filter({accuracy: -1}).count());
+    var totalScore = corrResp-wrongResp
     //var congruent_rt = Math.round(jsPsych.data.get().filter({correct: true, stim_type: 'congruent'}).select('rt').mean());
     //var incongruent_rt = Math.round(jsPsych.data.get().filter({correct: true, stim_type: 'incongruent'}).select('rt').mean());
     var subjID = jsPsych.data.get().last(1).values()[0]['participantCode']
-    return "<p>You earned "+corrResp+" </p> " + "<p>but lost "+wrongResp+" of them.</p> " +
-    "<p><br>The experiment is now over. Thanks so much for participating. Press any key to complete the experiment.</p>";
+    return "<p>You earned "+totalScore+ " points.</p>" +
+    "<p><br>The experiment is now over. Thanks so much for participating.</p>";
   }
 };
 
