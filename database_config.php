@@ -1,8 +1,8 @@
 <?php
-  $servername = "localhost"; // local host or server ip address?
+  $servername = "localhost";
   $port = 3306;
   $username = "root";
-  $password = "karabiber10"; //if it asks mysql user root, if not: nyhe86bp
+  $password = "karabiber10"; 
   $dbname = "gainLossDatabase";
   $table = "dataColumns";
 ?>
