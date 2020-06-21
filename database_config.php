@@ -3,6 +3,6 @@
   $port = 3306;
   $username = "root";
   $password = "karabiber10"; //if it asks mysql user root, if not: nyhe86bp
-  $dbname = "EmoReguDatabase";
+  $dbname = "gainLossDatabase";
   $table = "dataColumns";
 ?>
