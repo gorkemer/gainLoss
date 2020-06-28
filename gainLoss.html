@@ -27,9 +27,9 @@ var fixCross = "<p><span style='font-size: 25px;'>+</span></p>"
 /* define welcome message trial */
 var welcome = {
   type: "instructions",
-  pages: ["<p><strong>Hello, thank you for participating in our experiment. Please read the below instructions before proceeding.<strong></p>"+ "<p>You will now perform two tasks that are both around 2-3 minutes long. In each trial of the tasks, you have to choose between two different symbols displayed on the screen, above and below a central cross.</p>" +
+  pages: ["<p><strong>Hello, thank you for participating in our experiment. Please read the below instructions before proceeding.</strong></p>"+ "<p>You will now perform two tasks that are both around 2-3 minutes long. In each trial of the tasks, you have to choose between two different symbols displayed on the screen, above and below a central cross.</p>" +
   "<p> Press the 'Up-Arrow Key' to select the top symbol and the 'Down-Arrow Key' to select the bottom symbol:</p>" +
-  "<img style='height: 20%; width: 20%; object-fit: cover'; src='img/upDownKeys.png'></img>"+
+  "<img style='height: 13%; width: 13%; object-fit: cover'; src='img/upDownKeys.png'></img>"+
      "<div style='margin: auto 0;text-align:center;'>"+
   "<p style='display:inline-block;min-width:65.5%;'> As an outcome of your choice you may:</p>"+ 
   "<span><br>&#8226 get nothing</span>" +
@@ -267,7 +267,7 @@ var responseFeedback = {
           } else if (responseAccuracy == -1) {
             return "<p><span style='font-size: 25px;'>Loss 1</span></p>";
           } else {
-            return "<p><span style='font-size: 25px;'>No point</span></p>";
+            return "<p><span style='font-size: 25px;'>Nothing</span></p>";
           }
       },
     trial_duration: 1500
