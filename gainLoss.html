@@ -263,11 +263,11 @@ var responseFeedback = {
     stimulus: function () {
         var responseAccuracy = jsPsych.data.get().last(1).values()[0].accuracy; // get the data from two trials prior
           if (responseAccuracy == 1) {
-            return "<p><span style='font-size: 25px;'>Gain 1</span></p>";
+            return "<p><span style='font-size: 25px;'>Gain 1 Point</span></p>";
           } else if (responseAccuracy == -1) {
-            return "<p><span style='font-size: 25px;'>Loss 1</span></p>";
+            return "<p><span style='font-size: 25px;'>Loss 1 Point</span></p>";
           } else {
-            return "<p><span style='font-size: 25px;'>Nothing</span></p>";
+            return "<p><span style='font-size: 25px;'>Get Nothing</span></p>";
           }
       },
     trial_duration: 1500,
