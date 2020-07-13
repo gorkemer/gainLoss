@@ -3,6 +3,6 @@
   $port = 3306;
   $username = "root";
   $password = "karabiber10"; 
-  $dbname = "gainLossDatabase";
+  $dbname = "gainLossDataBase";
   $table = "dataColumns";
 ?>

@@ -173,8 +173,8 @@ trial_pairsLoss.push(
   );
 
 //randomizing the order of trials
-var trial_pairsGain = jsPsych.randomization.repeat(trial_pairsGain, 3);
-var trial_pairsLoss = jsPsych.randomization.repeat(trial_pairsLoss, 3);
+var trial_pairsGain = jsPsych.randomization.repeat(trial_pairsGain, 1);
+var trial_pairsLoss = jsPsych.randomization.repeat(trial_pairsLoss, 1);
 
 var fixation = {
       type: 'html-keyboard-response',
@@ -188,7 +188,8 @@ var twoImagesGain = {
     stimulus: jsPsych.timelineVariable('stimulus'),
     choices: ['uparrow', 'downarrow'],
     //trial_duration: 2000,
-    data: {pair_type: jsPsych.timelineVariable('pairType'), pair_ori: jsPsych.timelineVariable('pairOri'), isItWin: jsPsych.timelineVariable('win')},
+    data: {pair_type: jsPsych.timelineVariable('pairType'), pair_ori: jsPsych.timelineVariable('pairOri'), isItWin: jsPsych.timelineVariable('win')}, 
+
     //check what the response
     on_finish: function (data) {
       var responseGiven = jsPsych.data.get().last(1).values()[0].key_press;
@@ -224,7 +225,8 @@ var twoImagesLoss = {
     type: 'html-keyboard-response',
     stimulus: jsPsych.timelineVariable('stimulus'),
     choices: ['uparrow', 'downarrow'],
-    data: {pair_type: jsPsych.timelineVariable('pairType'), pair_ori: jsPsych.timelineVariable('pairOri'), isItWin: jsPsych.timelineVariable('win')},
+    data: {pair_type: jsPsych.timelineVariable('pairType'), pair_ori: jsPsych.timelineVariable('pairOri'), isItWin: jsPsych.timelineVariable('win')}, // commented out 
+
     //check what the response
     on_finish: function (data) {
       var responseGiven = jsPsych.data.get().last(1).values()[0].key_press;
@@ -323,13 +325,13 @@ console.log ("gain task starts first")
 }
 jsPsych.data.addProperties({gain_first: gainFirst})
 
-  jsPsych.init({
-    timeline: timeline,
-    //on_finish: function() {
-      //jsPsych.data.displayData();
-    //}
-    on_finish: saveData
-  });
+jsPsych.init({
+  timeline: timeline,
+  //on_finish: function() {
+    //jsPsych.data.displayData();
+  //}
+  on_finish: saveData
+});
 
 </script>
 </html>
