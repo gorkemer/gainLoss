@@ -107,8 +107,8 @@ var winPairDown_w = {stimulus: stim3 + fixCross+ stim2, correct: "2", incorrect:
 var winPairDown_n = {stimulus: stim3 + fixCross+ stim2, correct: "3", incorrect: "2", correctLoc: "top", incorrectLoc: "bottom",pairType: "gain", pairOri: "a-down", win: false}
 
 // #2 Loss Pairs
-var lossPairUp_l = {stimulus: stim4 + fixCross+ stim1, correct: "1", incorrect: "4", correctLoc: "bottom", pairType: "loss", pairOri: "a-up", win: true}
-var lossPairUp_n = {stimulus: stim4 + fixCross + stim1, correct: "4", incorrect: "1", correctLoc: "top", incorrectLoc: "bottom",pairType: "loss", pairOri: "a-up", win: false}
+var lossPairUp_l = {stimulus: stim4 + fixCross+ stim1, correct: "1", incorrect: "4", correctLoc: "bottom", incorrectLoc: "top", pairType: "loss", pairOri: "a-up", win: true}
+var lossPairUp_n = {stimulus: stim4 + fixCross + stim1, correct: "4", incorrect: "1", correctLoc: "top", incorrectLoc: "bottom", pairType: "loss", pairOri: "a-up", win: false}
 var lossPairDown_l = {stimulus: stim1 + fixCross+ stim4, correct: "1", incorrect: "4", correctLoc: "top", incorrectLoc: "bottom",pairType: "loss", pairOri: "a-down", win: true}
 var lossPairDown_n = {stimulus: stim1 + fixCross+ stim4, correct: "4", incorrect: "1", correctLoc: "bottom", incorrectLoc: "top",pairType: "loss", pairOri: "a-down", win: false}
 console.log("partGroup should be 2:", partGroup)
@@ -188,7 +188,7 @@ var twoImagesGain = {
     stimulus: jsPsych.timelineVariable('stimulus'),
     choices: ['uparrow', 'downarrow'],
     //trial_duration: 2000,
-    data: {pair_type: jsPsych.timelineVariable('pairType'), pair_ori: jsPsych.timelineVariable('pairOri'), isItWin: jsPsych.timelineVariable('win'), correct: jsPsych.timelineVariable('correct'), incorrect: jsPsych.timelineVariable('incorrect'), correct_location: jsPsych.timelineVariable('correctLoc'), incorrect_location: jsPsych.timelineVariable('incorrectLoc')}, 
+    data: {pair_type: jsPsych.timelineVariable('pairType'), pair_ori: jsPsych.timelineVariable('pairOri'), isItWin: jsPsych.timelineVariable('win'), correctSymbol: jsPsych.timelineVariable('correct'), incorrectSymbol: jsPsych.timelineVariable('incorrect'), correctSymbol_location: jsPsych.timelineVariable('correctLoc'), incorrectSymbol_location: jsPsych.timelineVariable('incorrectLoc')}, 
 
     //check what the response
     on_finish: function (data) {
@@ -200,36 +200,36 @@ var twoImagesGain = {
       if (pair_type == "gain" && responseGiven == 38 && pair_ori == "a-up" && win_type == true) { // 38 uparrow, 40 downarrow 
         console.log('pair from gain; pressed up and ori was up and win is true')
         data.feedback = 1
-        data.selectsCorrect = true
+        data.selectsOverallCorrectSymbol = 1
       } else if (pair_type == "gain" && responseGiven == 40 && pair_ori == "a-down" && win_type == true) {
         console.log('pair from gain; pressed up and ori was down and win is true') 
         data.feedback = 1
-        data.selectsCorrect = true
+        data.selectsOverallCorrectSymbol = 1
       // to process %20 wrong select but gained trials
       } else if (pair_type == "gain" && responseGiven == 40 && pair_ori == "a-up" && win_type == false) { 
         //console.log('pair from gain; pressed up and ori was down and win is true') 
         console.log('selects the incorrect but rewarded') 
-        data.selectsCorrect = false //selects the incorrect but rewarded
+        data.selectsOverallCorrectSymbol = 0 //selects the incorrect but rewarded
         data.feedback = 1
       } else if (pair_type == "gain" && responseGiven == 38 && pair_ori == "a-down" && win_type == false) {
         //console.log('pair from gain; pressed up and ori was down and win is true') 
         console.log('selects the incorrect but rewarded') 
-        data.selectsCorrect = false //selects the incorrect but rewarded
+        data.selectsOverallCorrectSymbol = 0 //selects the incorrect but rewarded
         data.feedback = 1
       } else if (pair_type == "gain" && responseGiven == 38 && pair_ori == "a-up" && win_type == false) {
         console.log('selects the correct but punished') 
-        data.selectsCorrect = true //selects the correct but punished
+        data.selectsOverallCorrectSymbol = 1 //selects the correct but punished
         data.feedback = 0
       } else if (pair_type == "gain" && responseGiven == 40 && pair_ori == "a-down" && win_type == false) {
         console.log('selects the correct but punished') 
-        data.selectsCorrect = true //selects the correct but punished
+        data.selectsOverallCorrectSymbol = 1 //selects the correct but punished
         data.feedback = 0
       } else {
         console.log('running else');
         console.log('responseGiven', responseGiven);
         console.log('pair_ori', pair_ori);
         console.log('isItWin', win_type);
-        data.selectsCorrect = false
+        data.selectsOverallCorrectSymbol = 0
         data.feedback = 0
 
       }
@@ -240,7 +240,7 @@ var twoImagesLoss = {
     type: 'html-keyboard-response',
     stimulus: jsPsych.timelineVariable('stimulus'),
     choices: ['uparrow', 'downarrow'],
-    data: {pair_type: jsPsych.timelineVariable('pairType'), pair_ori: jsPsych.timelineVariable('pairOri'), isItWin: jsPsych.timelineVariable('win'), correct: jsPsych.timelineVariable('correct'), incorrect: jsPsych.timelineVariable('incorrect'), correct_location: jsPsych.timelineVariable('correctLoc'), incorrect_location: jsPsych.timelineVariable('incorrectLoc')}, 
+    data: {pair_type: jsPsych.timelineVariable('pairType'), pair_ori: jsPsych.timelineVariable('pairOri'), isItWin: jsPsych.timelineVariable('win'), correctSymbol: jsPsych.timelineVariable('correct'), incorrectSymbol: jsPsych.timelineVariable('incorrect'), correctSymbol_location: jsPsych.timelineVariable('correctLoc'), incorrectSymbol_location: jsPsych.timelineVariable('incorrectLoc')}, 
     //check what the response
     on_finish: function (data) {
       var responseGiven = jsPsych.data.get().last(1).values()[0].key_press;
@@ -250,30 +250,30 @@ var twoImagesLoss = {
         // loss logic: win_type shows the negative ones (punishment / lose 1)
 
 
-      if (pair_type == "loss" && responseGiven == 38 && pair_ori == "a-up" && win_type == true) {
+      if (pair_type == "loss" && responseGiven == 38 && pair_ori == "a-up" && win_type == true) { //here win_type = true equals to -1
         console.log('selects incorrect (loss 1)') 
-        data.selectsCorrect = false
+        data.selectsOverallCorrectSymbol = 0
         data.feedback = -1
       } else if (pair_type == "loss" && responseGiven == 40 && pair_ori == "a-down" && win_type == true) {
         console.log('selects incorrect (loss 1)') 
-        data.selectsCorrect = false
+        data.selectsOverallCorrectSymbol = 0
         data.feedback = -1
       // to process %20 wrong select but gained trials
       } else if (pair_type == "loss" && responseGiven == 40 && pair_ori == "a-up" && win_type == false) {
         console.log('selects the correct but punished') 
-        data.selectsCorrect = false //selects the correct but punished
+        data.selectsOverallCorrectSymbol = 1 //selects the correct but punished
         data.feedback = -1
       } else if (pair_type == "loss" && responseGiven == 38 && pair_ori == "a-down" && win_type == false) {
         console.log('selects the correct but punished') 
-        data.selectsCorrect = false //selects the correct but punished
+        data.selectsOverallCorrectSymbol = 1 //selects the correct but punished
         data.feedback = -1
-      } else if (pair_type == "gain" && responseGiven == 38 && pair_ori == "a-up" && win_type == false) {
+      } else if (pair_type == "loss" && responseGiven == 38 && pair_ori == "a-up" && win_type == false) {
         console.log('selects the incorrect but rewarded') 
-        data.selectsCorrect = true //selects the incorrect but rewarded
+        data.selectsOverallCorrectSymbol = 0 //selects the incorrect but rewarded
         data.feedback = 0
-      } else if (pair_type == "gain" && responseGiven == 40 && pair_ori == "a-down" && win_type == false) {
+      } else if (pair_type == "loss" && responseGiven == 40 && pair_ori == "a-down" && win_type == false) {
         console.log('selects the incorrect but rewarded') 
-        data.selectsCorrect = true //selects the incorrect but rewarded
+        data.selectsOverallCorrectSymbol = 0 //selects the incorrect but rewarded
         data.feedback = 0
       } else {
         console.log('selects correct (get nothing)');
@@ -281,7 +281,7 @@ var twoImagesLoss = {
         console.log('responseGiven', responseGiven);
         console.log('pair_ori', pair_ori);
         console.log('isItWin', win_type);
-        data.selectsCorrect = true
+        data.selectsOverallCorrectSymbol = 1
         data.feedback = 0
       }
     }
@@ -345,10 +345,10 @@ var testProcedureLoss = {
 if(participantID % 8 == 5 || participantID % 8 == 6 || participantID % 8 == 7 || participantID % 8 == 0){
   timeline.push(testProcedureLoss, taskSwitchScreen, testProcedureGain)
   console.log ("loss task starts first")
-  var gainFirst = false
+  var gainFirst = 0
 } else {
 timeline.push(testProcedureGain, taskSwitchScreen, testProcedureLoss, debrief)
-var gainFirst = true
+var gainFirst = 1
 console.log ("gain task starts first")
 }
 jsPsych.data.addProperties({gain_first: gainFirst})
