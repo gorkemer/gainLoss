@@ -345,13 +345,13 @@ var testProcedureLoss = {
 if(participantID % 8 == 5 || participantID % 8 == 6 || participantID % 8 == 7 || participantID % 8 == 0){
   timeline.push(testProcedureLoss, taskSwitchScreen, testProcedureGain)
   console.log ("loss task starts first")
-  var gainFirst = 0
+  //var gainFirst = 0
 } else {
 timeline.push(testProcedureGain, taskSwitchScreen, testProcedureLoss, debrief)
-var gainFirst = 1
+//var gainFirst = 1
 console.log ("gain task starts first")
 }
-jsPsych.data.addProperties({gain_first: gainFirst})
+//jsPsych.data.addProperties({gain_first: gainFirst})
 
 jsPsych.init({
   timeline: timeline,
