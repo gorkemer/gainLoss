@@ -9,7 +9,7 @@
   <script src="../jspsych-6.0.5/plugins/jspsych-image-keyboard-response.js"></script>
   <script src="../jspsych-6.0.5/plugins/jspsych-html-keyboard-response.js"></script>
   <script src="../jspsych-6.0.5/plugins/jspsych-instructions.js"></script>
-  <script src="../jspsych-6.0.5/plugins/jspsych-html-keyboard-response-feedbackupdated.js"></script>
+  <script src="../jspsych-6.0.5/plugins/jspsych-html-a.js"></script>
 
 
 </head>
@@ -180,7 +180,7 @@ var trial_pairsGain = jsPsych.randomization.repeat(trial_pairsGain, 1);
 var trial_pairsLoss = jsPsych.randomization.repeat(trial_pairsLoss, 1);
 
 var twoImagesGain = {
-    type: 'html-keyboard-response-feedbackupdated',
+    type: 'html-a',
     stimulus: jsPsych.timelineVariable('stimulus'),
     choices: ['uparrow', 'downarrow'],
     //trial_duration: 2000,
