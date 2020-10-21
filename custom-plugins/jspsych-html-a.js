@@ -9,7 +9,7 @@
  **/
 
 
-jsPsych.plugins["html-a-response"] = (function() {
+jsPsych.plugins["html-a"] = (function() {
 
   var plugin = {};
 
