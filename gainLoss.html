@@ -8,7 +8,10 @@
   <script src="../jspsych-6.0.5/plugins/jspsych-image-button-response.js"></script>
   <script src="../jspsych-6.0.5/plugins/jspsych-image-keyboard-response.js"></script>
   <script src="../jspsych-6.0.5/plugins/jspsych-html-keyboard-response.js"></script>
-    <script src="../jspsych-6.0.5/plugins/jspsych-instructions.js"></script>
+  <script src="../jspsych-6.0.5/plugins/jspsych-instructions.js"></script>
+  <script src="../jspsych-6.0.5/plugins/jspsych-html-keyboard-response-feedbackupdated.js"></script>
+
+
 </head>
 <body></body>
 <script>
@@ -277,22 +280,6 @@ var twoImagesLoss = {
         data.selectsOverallCorrectSymbol = 1
         data.feedback = 0
       }
-
-      var responseFeedback = {
-      type: "html-keyboard-response",
-      stimulus: function () {
-        var responseFeedback = jsPsych.data.get().last(1).values()[0].feedback; // get the data from two trials prior
-          if (responseFeedback == 1) {
-            return "<p><span style='font-size: 25px;'>Gain 1 Point</span></p>";
-          } else if (responseFeedback == -1) {
-            return "<p><span style='font-size: 25px;'>Lose 1 Point</span></p>";
-          } else {
-            return "<p><span style='font-size: 25px;'>Get Nothing</span></p>";
-          }
-      },
-    trial_duration: 1500,
-    response_ends_trial:false
-};
     }
   }
 
