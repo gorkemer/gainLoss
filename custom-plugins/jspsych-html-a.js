@@ -98,7 +98,7 @@ jsPsych.plugins["html-a"] = (function() {
       display_element.innerHTML = '';
 
       // move on to the next trial
-      jsPsych.finishTrial(trial_data);
+      jsPsych.finishTrial();
     };
 
     // function to handle responses by the subject
