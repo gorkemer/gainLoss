@@ -180,7 +180,7 @@ var trial_pairsGain = jsPsych.randomization.repeat(trial_pairsGain, 1);
 var trial_pairsLoss = jsPsych.randomization.repeat(trial_pairsLoss, 1);
 
 var twoImagesGain = {
-    type: 'html-a',
+    type: 'html-keyboard-response',
     stimulus: jsPsych.timelineVariable('stimulus'),
     choices: ['uparrow', 'downarrow'],
     //trial_duration: 2000,
@@ -284,7 +284,7 @@ var twoImagesLoss = {
   }
 
 var feedback_trial = {
-    type: "html-keyboard-response",
+    type: "html-a",
     stimulus: function () {
         var responseFeedback = jsPsych.data.get().last(1).values()[0].feedback; // get the data from two trials prior
           if (responseFeedback == 1) {
