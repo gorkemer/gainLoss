@@ -283,7 +283,7 @@ var twoImagesLoss = {
     }
   }
 
-var responseFeedback = {
+var feedback_trial = {
     type: "html-keyboard-response",
     stimulus: function () {
         var responseFeedback = jsPsych.data.get().last(1).values()[0].feedback; // get the data from two trials prior
@@ -333,7 +333,7 @@ var testProcedureGain = {
 };
 
 var testProcedureLoss = {
-    timeline: [twoImagesLoss,responseFeedback], //responseFeedback
+    timeline: [twoImagesLoss,feedback_trial], //responseFeedback
     timeline_variables: trial_pairsLoss
 };
 
