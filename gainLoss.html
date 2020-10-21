@@ -176,13 +176,6 @@ trial_pairsLoss.push(
 var trial_pairsGain = jsPsych.randomization.repeat(trial_pairsGain, 1);
 var trial_pairsLoss = jsPsych.randomization.repeat(trial_pairsLoss, 1);
 
-var fixation = {
-      type: 'html-keyboard-response',
-      stimulus: '+',
-      choices: jsPsych.NO_KEYS,
-      trial_duration: 500
-    };
-
 var twoImagesGain = {
     type: 'html-keyboard-response',
     stimulus: jsPsych.timelineVariable('stimulus'),
@@ -284,12 +277,10 @@ var twoImagesLoss = {
         data.selectsOverallCorrectSymbol = 1
         data.feedback = 0
       }
-    }
-  }
 
-var responseFeedback = {
-    type: "html-keyboard-response",
-    stimulus: function () {
+      var responseFeedback = {
+      type: "html-keyboard-response",
+      stimulus: function () {
         var responseFeedback = jsPsych.data.get().last(1).values()[0].feedback; // get the data from two trials prior
           if (responseFeedback == 1) {
             return "<p><span style='font-size: 25px;'>Gain 1 Point</span></p>";
@@ -302,6 +293,24 @@ var responseFeedback = {
     trial_duration: 1500,
     response_ends_trial:false
 };
+    }
+  }
+
+// var responseFeedback = {
+//     type: "html-keyboard-response",
+//     stimulus: function () {
+//         var responseFeedback = jsPsych.data.get().last(1).values()[0].feedback; // get the data from two trials prior
+//           if (responseFeedback == 1) {
+//             return "<p><span style='font-size: 25px;'>Gain 1 Point</span></p>";
+//           } else if (responseFeedback == -1) {
+//             return "<p><span style='font-size: 25px;'>Lose 1 Point</span></p>";
+//           } else {
+//             return "<p><span style='font-size: 25px;'>Get Nothing</span></p>";
+//           }
+//       },
+//     trial_duration: 1500,
+//     response_ends_trial:false
+// };
 
 
 var taskSwitchScreen = {
