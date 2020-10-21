@@ -101,7 +101,22 @@ jsPsych.plugins["html-a"] = (function() {
       jsPsych.finishTrial(trial_data);
     };
 
+    // function to handle responses by the subject
+    var after_response = function(info) {
 
+      // after a valid response, the stimulus will have the CSS class 'responded'
+      // which can be used to provide visual feedback that a response was recorded
+      display_element.querySelector('#jspsych-html-keyboard-response-stimulus').className += ' responded';
+
+      // only record the first response
+      if (response.key == null) {
+        response = info;
+      }
+
+      if (trial.response_ends_trial) {
+        end_trial();
+      }
+    };
 
     // start the response listener
     if (trial.choices != jsPsych.NO_KEYS) {
