@@ -9,7 +9,7 @@
  **/
 
 
-jsPsych.plugins["html-keyboard-response"] = (function() {
+jsPsych.plugins["html-a-response"] = (function() {
 
   var plugin = {};
 
