@@ -180,7 +180,7 @@ var trial_pairsGain = jsPsych.randomization.repeat(trial_pairsGain, 1);
 var trial_pairsLoss = jsPsych.randomization.repeat(trial_pairsLoss, 1);
 
 var twoImagesGain = {
-    type: 'jspsych-html-keyboard-response-feedbackupdated',
+    type: 'html-keyboard-response-feedbackupdated',
     stimulus: jsPsych.timelineVariable('stimulus'),
     choices: ['uparrow', 'downarrow'],
     //trial_duration: 2000,
