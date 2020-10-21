@@ -104,24 +104,15 @@ jsPsych.plugins["html-a"] = (function() {
     // function to handle responses by the subject
     var after_response = function(info) {
     
-    var basilantus = response.key
-
-    var responseGiven = jsPsych.data.get().last(1).values()[0].key_press;
-    var pair_type = jsPsych.data.get().last(1).values()[0].pair_type;
-    var pair_ori = jsPsych.data.get().last(1).values()[0].pair_ori;
-    var win_type = jsPsych.data.get().last(1).values()[0].isItWin;
-
-    var responseFeedback = jsPsych.data.get().last(1).values()[0].feedback;
+    response = info 
+    var basilantus = info.key
     //If the response has not been recorded, record it
-      if (response.key == -1) {
-        response = info; //Replace the response object created above
+      if (response.key == 38) {
         // check response accuracy
-
-        if (responseFeedback === 1) {
+        var resp_ac = correctOrNot();
+        if (resp_ac === true) {
           return "<p><span style='font-size: 25px;'>Gain 1 Point</span></p>";// code here to remove fixation and/or add correct feedback 
-        } else if (responseFeedback == -1) {
-            return "<p><span style='font-size: 25px;'>Lose 1 Point</span></p>";
-          } else {
+        } else {
             return "<p><span style='font-size: 25px;'>Get Nothing</span></p>";
           }
       }
