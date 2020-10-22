@@ -9,7 +9,7 @@
  **/
 
 
-jsPsych.plugins["html-a"] = (function() {
+jsPsych.plugins["html-keyboard-response"] = (function() {
 
   var plugin = {};
 
@@ -87,7 +87,7 @@ jsPsych.plugins["html-a"] = (function() {
         jsPsych.pluginAPI.cancelKeyboardResponse(keyboardListener);
       }
 
-      //gather the data to store for the trial
+      // gather the data to store for the trial
       var trial_data = {
         "rt": response.rt,
         "stimulus": trial.stimulus,
@@ -98,19 +98,29 @@ jsPsych.plugins["html-a"] = (function() {
       display_element.innerHTML = '';
 
       // move on to the next trial
-      jsPsych.finishTrial();
+      jsPsych.finishTrial(trial_data);
     };
 
     // function to handle responses by the subject
     var after_response = function(info) {
-
+    
+    //If the response has not been recorded, record it
+      if (response.key == -1) {
+        response = info; //Replace the response object created above
+        // check response accuracy
+        var responseFeedback = jsPsych.data.get().last(1).values()[0].feedback;
+        if (responseFeedback === 1) {
+          return "<p><span style='font-size: 25px;'>Gain 1 Point</span></p>";// code here to remove fixation and/or add correct feedback 
+        } else if (responseFeedback == -1) {
+            return "<p><span style='font-size: 25px;'>Lose 1 Point</span></p>";
+          } else {
+            return "<p><span style='font-size: 25px;'>Get Nothing</span></p>";
+          }
+      }
       // after a valid response, the stimulus will have the CSS class 'responded'
       // which can be used to provide visual feedback that a response was recorded
       display_element.querySelector('#jspsych-html-keyboard-response-stimulus').className += ' responded';
 
-      if (info.key = 38){
-        display_element.querySelector('#jspsych-html-keyboard-response-stimulus').className += ' abaasad';
-      }
       // only record the first response
       if (response.key == null) {
         response = info;

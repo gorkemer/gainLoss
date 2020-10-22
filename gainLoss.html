@@ -54,7 +54,7 @@ if (typeof participantID === "undefined") {
 alert("participant ID is undefined, assigning arbitrarily. ");
 var participantID = 1;
 }
-jsPsych.data.addProperties({participant_ID: participantID});
+//jsPsych.data.addProperties({participant_ID: participantID});
 
 function saveData() {
     var xhr = new XMLHttpRequest();
@@ -84,7 +84,7 @@ else if(participantID % 4 == 0){
 partGroup =4;
 };
 
-jsPsych.data.addProperties({part_group: partGroup}) // update the global variable
+//jsPsych.data.addProperties({part_group: partGroup}) // update the global variable
 console.log('Group is defined as: ', partGroup);
 
 if (partGroup == 1){
@@ -184,7 +184,17 @@ var twoImagesGain = {
     stimulus: jsPsych.timelineVariable('stimulus'),
     choices: ['uparrow', 'downarrow'],
     //trial_duration: 2000,
-    data: {pair_type: jsPsych.timelineVariable('pairType'), pair_ori: jsPsych.timelineVariable('pairOri'), isItWin: jsPsych.timelineVariable('win'), correctSymbol: jsPsych.timelineVariable('correct'), incorrectSymbol: jsPsych.timelineVariable('incorrect'), correctSymbol_location: jsPsych.timelineVariable('correctLoc'), incorrectSymbol_location: jsPsych.timelineVariable('incorrectLoc')}, 
+    data: {
+      pair_type: jsPsych.timelineVariable('pairType'), 
+      pair_ori: jsPsych.timelineVariable('pairOri'), 
+      isItWin: jsPsych.timelineVariable('win'), 
+      correctSymbol: jsPsych.timelineVariable('correct'),
+      incorrectSymbol: jsPsych.timelineVariable('incorrect'), 
+      correctSymbol_location: jsPsych.timelineVariable('correctLoc'),
+      incorrectSymbol_location: jsPsych.timelineVariable('incorrectLoc'),
+      participant_ID: participantID, 
+      part_group: partGroup,
+  }, 
 
     //check what the response
     on_finish: function (data) {
