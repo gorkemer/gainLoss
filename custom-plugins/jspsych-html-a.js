@@ -87,12 +87,12 @@ jsPsych.plugins["html-a"] = (function() {
         jsPsych.pluginAPI.cancelKeyboardResponse(keyboardListener);
       }
 
-      // gather the data to store for the trial
-      // var trial_data = {
-      //   "rt": response.rt,
-      //   "stimulus": trial.stimulus,
-      //   "key_press": response.key
-      // };
+      gather the data to store for the trial
+      var trial_data = {
+        "rt": response.rt,
+        "stimulus": trial.stimulus,
+        "key_press": response.key
+      };
 
       // clear the display
       display_element.innerHTML = '';
@@ -108,6 +108,9 @@ jsPsych.plugins["html-a"] = (function() {
       // which can be used to provide visual feedback that a response was recorded
       display_element.querySelector('#jspsych-html-keyboard-response-stimulus').className += ' responded';
 
+      if (info.key = 38){
+        display_element.querySelector('#jspsych-html-keyboard-response-stimulus').className += ' abaasad';
+      }
       // only record the first response
       if (response.key == null) {
         response = info;
