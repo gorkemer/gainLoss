@@ -67,8 +67,8 @@ function saveData() {
         console.log(response.success);
       }
     };
-    var trials_data = jsPsych.data.get().filter([{pair_type: "loss"}, {pair_type: "gain"}]);
-    console.log(trials_data.csv());
+    //var trials_data = jsPsych.data.get().filter([{pair_type: "loss"}, {pair_type: "gain"}]);
+    //console.log(trials_data.csv());
     xhr.send(jsPsych.data.get().filter([{pair_type: "loss"}, {pair_type: "gain"}]).json());
     //xhr.send(jsPsych.data.get().json());
   }
