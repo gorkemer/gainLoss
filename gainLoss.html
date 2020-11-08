@@ -10,8 +10,8 @@
   <script src="../jspsych-6.0.5/plugins/jspsych-html-keyboard-response.js"></script>
   <script src="../jspsych-6.0.5/plugins/jspsych-instructions.js"></script>
   <script src="custom-plugins/jspsych-html-a.js"></script>
-  <script src="custom-plugins/jspsych-simplePlugin.js"></script>
-
+  <!-- <script src="custom-plugins/jspsych-simplePlugin.js"></script>
+ -->
 
 </head>
 <body></body>
@@ -55,7 +55,7 @@ if (typeof participantID === "undefined") {
 alert("participant ID is undefined, assigning arbitrarily. ");
 var participantID = 1;
 }
-//jsPsych.data.addProperties({participant_ID: participantID});
+jsPsych.data.addProperties({participant_ID: participantID});
 
 function saveData() {
     var xhr = new XMLHttpRequest();
@@ -67,7 +67,10 @@ function saveData() {
         console.log(response.success);
       }
     };
-    xhr.send(jsPsych.data.get().json());
+    var trials_data = jsPsych.data.get().filter([{pair_type: "loss"}, {pair_type: "gain"}]);
+    console.log(trials_data.csv());
+    xhr.send(jsPsych.data.get().filter([{pair_type: "loss"}, {pair_type: "gain"}]).json());
+    //xhr.send(jsPsych.data.get().json());
   }
 
 
@@ -181,7 +184,7 @@ var trial_pairsGain = jsPsych.randomization.repeat(trial_pairsGain, 1);
 var trial_pairsLoss = jsPsych.randomization.repeat(trial_pairsLoss, 1);
 
 var twoImagesGain = {
-    type: 'html-a',
+    type: 'html-keyboard-response',
     stimulus: jsPsych.timelineVariable('stimulus'),
     choices: ['uparrow', 'downarrow'],
     //trial_duration: 2000,
@@ -363,6 +366,7 @@ timeline.push(testProcedureGain, taskSwitchScreen, testProcedureLoss, debrief)
 console.log ("gain task starts first")
 }
 //jsPsych.data.addProperties({gain_first: gainFirst})
+
 
 jsPsych.init({
   timeline: timeline,
