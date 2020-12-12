@@ -1,2 +1,0 @@
-# gainLoss
-Reinforcement Learning Task
