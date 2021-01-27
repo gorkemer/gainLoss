@@ -76,7 +76,7 @@ function saveData() {
     };
     //var trials_data = jsPsych.data.get().filter([{pair_type: "loss"}, {pair_type: "gain"}]);
     //console.log(trials_data.csv());
-    xhr.send(jsPsych.data.get().filter([{pair_type: "loss"}, {pair_type: "gain"}]).json());
+    xhr.send(jsPsych.data.get().last(2).filter([{pair_type: "loss"}, {pair_type: "gain"}]).json());
     //xhr.send(jsPsych.data.get().json());
   }
 
@@ -322,9 +322,9 @@ var feedback_trial = {
           }
       },
     trial_duration: 1500,
-    response_ends_trial:false
+    response_ends_trial:false,
+    on_finish: saveData
 };
-
 
 var taskSwitchScreen = {
   type: "instructions",
@@ -378,11 +378,11 @@ console.log ("gain task starts first")
 
 
 jsPsych.init({
-  timeline: timeline,
+  timeline: timeline
   //on_finish: function() {
     //jsPsych.data.displayData();
   //}
-  on_finish: saveData
+  //on_finish: saveData
 });
 
 </script>
