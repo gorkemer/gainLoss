@@ -19,6 +19,7 @@
 <script>
 
 var timeline = [];
+var nTrials = 2;
 var testStimuli = [];
 var trial_pairsGain = []; 
 var trial_pairsLoss = []; 
@@ -29,6 +30,7 @@ var stim4 = "<img src='img/4.png' width=35%>"
 var trial_number = 1
 //color in-line:  color: #ff0000;
 var fixCross = "<p><span style='font-size: 25px;'>+</span></p>"
+
 
 timeline.push({
   type: 'fullscreen',
@@ -187,8 +189,8 @@ trial_pairsLoss.push(
   );
 
 //randomizing the order of trials
-var trial_pairsGain = jsPsych.randomization.repeat(trial_pairsGain, 1);
-var trial_pairsLoss = jsPsych.randomization.repeat(trial_pairsLoss, 1);
+var trial_pairsGain = jsPsych.randomization.repeat(trial_pairsGain, nTrials);
+var trial_pairsLoss = jsPsych.randomization.repeat(trial_pairsLoss, nTrials);
 
 var twoImagesGain = {
     type: 'html-keyboard-response',
